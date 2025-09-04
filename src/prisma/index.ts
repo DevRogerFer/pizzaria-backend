@@ -1,4 +1,5 @@
 // importando as tipagens do prisma client
+//import {PrismaClient} from '@prisma/client';
 import {PrismaClient} from '../generated/prisma/client';
 // inicializando
 const prismaClient = new PrismaClient();
