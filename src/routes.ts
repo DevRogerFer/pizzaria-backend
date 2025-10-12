@@ -43,7 +43,8 @@ router.get('/category', isAuthenticated, new ListCategoryController().handle) //
 
 // -- ROTAS PRODUCTS --
 // upload.single('file') permite o upload de um único arquivo com o campo 'file'
-router.post('/product', isAuthenticated, upload.single('file'), new CreateProductController().handle) // CREATE PRODUCT
+//router.post('/product', isAuthenticated, upload.single('file'), new CreateProductController().handle) // CREATE PRODUCT
+router.post('/product', isAuthenticated, new CreateProductController().handle) // CREATE PRODUCT
 router.get('/category/product', isAuthenticated, new ListByCategoryController().handle) // LIST PRODUCTS BY CATEGORY
 
 // -- ROTAS ORDERS --
