@@ -47,10 +47,4 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     })
 })
 // inicializando o projeto
- app.listen(3333, () => console.log('Servidor online!'));    //3333: porta
-/*
-app.get('/', (req: Request, res: Response) => {
-    res.send('Servidor online!');
-    return
-});
-*/
+ app.listen(process.env.PORT, () => console.log('Servidor online!'));    //3333: porta
