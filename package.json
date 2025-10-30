@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "start": "node dist/server.js",
-    "build": "tsc && npx prisma generate",
-    "vercel-build": "tsc && prisma generate && prisma migrate deploy"
+    "build": "tsc",
+    "postinstall": "prisma generate",
+    "migrate:deploy": "prisma migrate deploy"
   },
   "devDependencies": {
     "@types/bcryptjs": "^3.0.0",

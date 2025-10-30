@@ -23,10 +23,8 @@ app.use((err: any, _req: any, res: any) => {
     });
 });
 
-// Para desenvolvimento local
-if (process.env.NODE_ENV !== "production") {
-    app.listen(process.env.PORT || 3333);
-}
+const PORT = process.env.PORT || 3333;
 
-// Para Vercel
-export default app;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
