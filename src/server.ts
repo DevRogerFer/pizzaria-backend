@@ -15,7 +15,7 @@ app.use(fileUpload({
 app.use(router);
 
 // Error handling middleware
-app.use((err: any, _req: any, res: any) => {
+app.use((err: any, _req: any, res: any, _next: any) => {
     console.error(err);
     return res.status(500).json({
         status: "error",
