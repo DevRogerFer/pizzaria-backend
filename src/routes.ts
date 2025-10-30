@@ -1,7 +1,5 @@
 // importando as bibliotecas do express
 import {Router} from 'express'
-// importano o multer para upload de arquivos
-import multer from 'multer';
 // importando os Controllers de Usuário
 import { CreateUserController } from './controllers/user/CreateUserController';
 import { AuthUserController } from './controllers/user/AuthUserController';
@@ -24,13 +22,8 @@ import { FinishOrderController } from './controllers/order/FinishOrderController
 
 // importando o middleware de autenticação
 import { isAuthenticated } from './middlewares/isAuthenticated';
-// Importando configuração do multer (para upload de arquivos de fotos)
-import uploadConfig from './config/multer';
-
 // criando o router
 const router = Router();
-// criando o multer com a configuração de upload
-const upload = multer(uploadConfig.upload("./tmp"));
 
 // -- ROTAS USERS --
 router.post('/users', new CreateUserController().handle) // USER
