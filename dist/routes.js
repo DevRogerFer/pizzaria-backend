@@ -1,13 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 // importando as bibliotecas do express
 const express_1 = require("express");
-// importano o multer para upload de arquivos
-const multer_1 = __importDefault(require("multer"));
 // importando os Controllers de Usuário
 const CreateUserController_1 = require("./controllers/user/CreateUserController");
 const AuthUserController_1 = require("./controllers/user/AuthUserController");
@@ -29,13 +24,9 @@ const DetailOrderController_1 = require("./controllers/order/DetailOrderControll
 const FinishOrderController_1 = require("./controllers/order/FinishOrderController");
 // importando o middleware de autenticação
 const isAuthenticated_1 = require("./middlewares/isAuthenticated");
-// Importando configuração do multer (para upload de arquivos de fotos)
-const multer_2 = __importDefault(require("./config/multer"));
 // criando o router
 const router = (0, express_1.Router)();
 exports.router = router;
-// criando o multer com a configuração de upload
-const upload = (0, multer_1.default)(multer_2.default.upload("./tmp"));
 // -- ROTAS USERS --
 router.post('/users', new CreateUserController_1.CreateUserController().handle); // USER
 router.post('/session', new AuthUserController_1.AuthUserController().handle); // LOGIN

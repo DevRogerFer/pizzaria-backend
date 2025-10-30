@@ -16,13 +16,19 @@ app.use((0, express_fileupload_1.default)({
 }));
 app.use(routes_1.router);
 // Error handling middleware
-app.use((err, _req, res) => {
+const errorHandler = (err, req, res, next) => {
     console.error(err);
+    if (err instanceof Error) {
+        return res.status(400).json({
+            error: err.message
+        });
+    }
     return res.status(500).json({
         status: 'error',
-        message: err.message || 'Internal Server Error'
+        message: 'Internal Server Error.'
     });
-});
+};
+app.use(errorHandler);
 // Para desenvolvimento local
 if (process.env.NODE_ENV !== 'production') {
     app.listen(process.env.PORT || 3333);

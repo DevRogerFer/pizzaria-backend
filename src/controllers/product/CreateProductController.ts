@@ -27,7 +27,7 @@ class CreateProductController {
         if(!req.files || Object.keys(req.files).length === 0) {
             throw new Error("Error uploading file!");
         } else {
-            const file: UploadedFile = req.files['file']
+            const file = req.files['file'] as UploadedFile
             // fazendo o upload da imagem para o cloudinary            
             const resultFile: UploadApiResponse = await new Promise((resolve, reject) => {
                 cloudinary.uploader.upload_stream({}, function(error, result) {

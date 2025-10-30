@@ -1,9 +1,8 @@
-import express, { Request, Response, NextFunction } from 'express';
-import 'express-async-errors';
-import cors from 'cors';
-import path from 'path';
-import { router } from './routes';
-import fileUpload from 'express-fileupload';
+import express from "express";
+import "express-async-errors";
+import cors from "cors";
+import { router } from "./routes";
+import fileUpload from "express-fileupload";
 
 const app = express();
 
@@ -15,25 +14,17 @@ app.use(fileUpload({
 
 app.use(router);
 
-app.use(
-    '/files',
-    express.static(path.resolve(__dirname, '..', 'tmp'))
-);
-
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    if (err instanceof Error) {
-        return res.status(400).json({
-            error: err.message
-        });
-    }
+// Error handling middleware
+app.use((err: any, _req: any, res: any) => {
+    console.error(err);
     return res.status(500).json({
-        status: 'error',
-        message: 'Internal Server Error.'
+        status: "error",
+        message: err.message || "Internal Server Error"
     });
 });
 
 // Para desenvolvimento local
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
     app.listen(process.env.PORT || 3333);
 }
 

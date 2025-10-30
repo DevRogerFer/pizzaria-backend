@@ -5,13 +5,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "start": "ts-node src/server.ts",
-    "build": "npx prisma generate",
-    "vercel-build": "prisma generate && prisma migrate deploy"
+    "start": "node dist/server.js",
+    "build": "tsc && npx prisma generate",
+    "vercel-build": "tsc && prisma generate && prisma migrate deploy"
   },
   "devDependencies": {
     "@types/bcryptjs": "^3.0.0",
     "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "@types/express-fileupload": "^1.5.1",
     "@types/jsonwebtoken": "^9.0.10",
     "ts-node-dev": "^2.0.0",
@@ -19,7 +20,6 @@
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
-    "@types/express": "^5.0.3",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",
     "cors": "^2.8.5",
