@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "start": "node dist/server.js",
-    "build": "tsc && prisma migrate deploy && prisma generate",
+    "start": "prisma migrate deploy && node dist/server.js",
+    "build": "tsc",
     "postinstall": "prisma generate",
     "migrate:deploy": "prisma migrate deploy"
   },
