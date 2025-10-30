@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "start": "node dist/server.js",
-    "build": "tsc",
+    "build": "tsc && prisma migrate deploy && prisma generate",
     "postinstall": "prisma generate",
     "migrate:deploy": "prisma migrate deploy"
   },
   "devDependencies": {
+    "@railway/cli": "^4.11.0",
     "@types/bcryptjs": "^3.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
@@ -19,7 +20,6 @@
     "ts-node-dev": "^2.0.0"
   },
   "dependencies": {
-    "typescript": "^5.8.3",
     "@prisma/client": "^6.15.0",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",
@@ -29,6 +29,8 @@
     "express-async-errors": "^3.1.1",
     "express-fileupload": "^1.5.2",
     "jsonwebtoken": "^9.0.2",
-    "prisma": "^6.11.1"
+    "pg": "^8.16.3",
+    "prisma": "^6.11.1",
+    "typescript": "^5.8.3"
   }
 }
