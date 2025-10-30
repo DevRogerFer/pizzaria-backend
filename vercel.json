@@ -2,15 +2,21 @@
     "version": 2,
     "builds": [
         {
-            "src": "dist/server.js",
-            "use": "@vercel/node",
-            "config": { "includeFiles":["dist/**"] }
+            "src": "src/server.ts",
+            "use": "@vercel/node"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "dist/server.js"
+            "dest": "src/server.ts"
         }
-    ]
+    ],
+    "env": {
+        "DATABASE_URL": "@database_url",
+        "JWT_SECRET": "@jwt_secret",
+        "CLOUDINARY_NAME": "@cloudinary_name",
+        "CLOUDINARY_KEY": "@cloudinary_key",
+        "CLOUDINARY_SECRET": "@cloudinary_secret"
+    }
 }
