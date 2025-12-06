@@ -1,5 +1,5 @@
 // Script de validação pré-deploy
-const BASE = 'https://web-production-a5f94.up.railway.app';
+const BASE = process.env.API_URL || 'http://localhost:3333';
 
 async function testEndpoint(path, method, body) {
   try {
@@ -28,7 +28,8 @@ async function testEndpoint(path, method, body) {
 (async () => {
   console.log('🔍 VALIDAÇÃO PRÉ-DEPLOY\n');
   console.log('Backend:', BASE);
-  console.log('Frontend: https://pizzaria-frontend-production.up.railway.app\n');
+  console.log('Frontend:', process.env.FRONTEND_URL || 'http://localhost:3000');
+  console.log('');
   
   console.log('═══════════════════════════════════════════════════');
   console.log('📋 TESTE 1: Health Check (GET /)');

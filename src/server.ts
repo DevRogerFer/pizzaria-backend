@@ -13,8 +13,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
     ? process.env.ALLOWED_ORIGINS.split(',') 
     : [
         'http://localhost:3000', 
-        'http://localhost:3001',
-        'https://pizzaria-frontend-production.up.railway.app'
+        'http://localhost:3001'
     ];
 
 app.use(cors({

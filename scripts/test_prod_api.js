@@ -1,4 +1,4 @@
-const BASE = 'https://web-production-a5f94.up.railway.app';
+const BASE = process.env.API_URL || 'http://localhost:3333';
 
 async function req(path, opts){
   const res = await fetch(BASE + path, opts);

@@ -1,6 +1,6 @@
 const https = require('https');
 
-const API_URL = 'https://web-production-a5f94.up.railway.app';
+const API_URL = process.env.API_URL || 'http://localhost:3333';
 
 console.log('🔍 Monitorando deploy no Railway...\n');
 console.log(`URL: ${API_URL}`);

@@ -1,4 +1,4 @@
-const BASE = 'https://web-production-a5f94.up.railway.app';
+const BASE = process.env.API_URL || 'http://localhost:3333';
 (async ()=>{
   for (const path of ['/', '/users', '/session']){
     try{
