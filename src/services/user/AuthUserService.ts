@@ -3,6 +3,8 @@ import prismaClient from "../../prisma";
 import {compare} from 'bcryptjs';
 // importando a biblioteca para gerar tokens JWT
 import {sign} from 'jsonwebtoken';
+// importando utilitários de validação
+import { validateAndSanitizeEmail } from '../../utils/validation';
 
 
 // criando a interface
@@ -14,10 +16,17 @@ interface AuthRequest {
 // criando a classe
 class AuthUserService {
     async execute({email, password}: AuthRequest){
+        // Validando e sanitizando email
+        const sanitizedEmail = validateAndSanitizeEmail(email);
+        
+        if (!password) {
+            throw new Error("Password is required");
+        }
+        
         // verificando se o email existe
         const user = await prismaClient.user.findFirst({
             where: {
-                email: email
+                email: sanitizedEmail
             }
         });
 

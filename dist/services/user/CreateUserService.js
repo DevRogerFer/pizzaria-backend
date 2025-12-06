@@ -17,17 +17,19 @@ exports.CreateUserService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
 // importando a biblioteca para criptografar senha
 const bcryptjs_1 = require("bcryptjs");
+// importando utilitários de validação
+const validation_1 = require("../../utils/validation");
 class CreateUserService {
     execute(_a) {
         return __awaiter(this, arguments, void 0, function* ({ name, email, password }) {
-            // verificando se foi enviado um e-mail
-            if (!email) {
-                throw new Error("Email incorrect!");
-            }
+            // Validando e sanitizando os dados de entrada
+            const sanitizedEmail = (0, validation_1.validateAndSanitizeEmail)(email);
+            const sanitizedName = (0, validation_1.validateName)(name);
+            (0, validation_1.validatePassword)(password);
             // verificando se o e-mail já está cadastrado na plataforma
             const userAlreadyExists = yield prisma_1.default.user.findFirst({
                 where: {
-                    email: email // onde e-mail (cadastrado) = email (recebido)
+                    email: sanitizedEmail
                 }
             });
             // se já existir
@@ -39,8 +41,8 @@ class CreateUserService {
             // cadastrando o usuário no banco de dados
             const user = yield prisma_1.default.user.create({
                 data: {
-                    name: name,
-                    email: email,
+                    name: sanitizedName,
+                    email: sanitizedEmail,
                     password: passwordHash, // salvando a senha criptografada
                 },
                 // selecionando o que será devolvido

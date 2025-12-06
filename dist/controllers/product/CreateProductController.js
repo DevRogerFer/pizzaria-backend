@@ -12,18 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateProductController = void 0;
 const CreateProductService_1 = require("../../services/product/CreateProductService");
 const cloudinary_1 = require("cloudinary");
-/*
-cloudinary.config({
+// Configuração do Cloudinary usando variáveis de ambiente
+cloudinary_1.v2.config({
     cloud_name: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_KEY,
     api_secret: process.env.CLOUDINARY_SECRET
-})
-*/
-// funcionando dessa forma:
-cloudinary_1.v2.config({
-    cloud_name: 'dj3qfngq7',
-    api_key: '416985641257727',
-    api_secret: 'LHUGIfUWO42yhbxA7cDX-ArEPiQ'
 });
 class CreateProductController {
     handle(req, res) {

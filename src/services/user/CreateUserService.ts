@@ -2,6 +2,8 @@
 import prismaClient from '../../prisma'
 // importando a biblioteca para criptografar senha
 import {hash} from 'bcryptjs'
+// importando utilitários de validação
+import { validateAndSanitizeEmail, validatePassword, validateName } from '../../utils/validation'
 
 interface UserRequest {
     name: string;
@@ -11,15 +13,15 @@ interface UserRequest {
 
 class CreateUserService {
     async execute({name, email, password}: UserRequest) {
-        // verificando se foi enviado um e-mail
-        if (!email) {
-            throw new Error("Email incorrect!")
-        }
+        // Validando e sanitizando os dados de entrada
+        const sanitizedEmail = validateAndSanitizeEmail(email);
+        const sanitizedName = validateName(name);
+        validatePassword(password);
 
         // verificando se o e-mail já está cadastrado na plataforma
         const userAlreadyExists = await prismaClient.user.findFirst({
             where: {
-                email: email    // onde e-mail (cadastrado) = email (recebido)
+                email: sanitizedEmail
             }
         })
 
@@ -34,8 +36,8 @@ class CreateUserService {
         // cadastrando o usuário no banco de dados
         const user = await prismaClient.user.create({
             data: {
-                name: name,
-                email: email,
+                name: sanitizedName,
+                email: sanitizedEmail,
                 password: passwordHash, // salvando a senha criptografada
             },
             // selecionando o que será devolvido

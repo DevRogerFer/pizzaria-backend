@@ -3,18 +3,11 @@ import { CreateProductService } from '../../services/product/CreateProductServic
 import { UploadedFile } from 'express-fileupload'
 import { v2 as cloudinary, UploadApiResponse } from 'cloudinary';
 
-/*
+// Configuração do Cloudinary usando variáveis de ambiente
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_KEY,
     api_secret: process.env.CLOUDINARY_SECRET
-})
-*/
-// funcionando dessa forma:
-cloudinary.config({
-    cloud_name: 'dj3qfngq7',
-    api_key: '416985641257727',
-    api_secret: 'LHUGIfUWO42yhbxA7cDX-ArEPiQ'
 })
 
 class CreateProductController {

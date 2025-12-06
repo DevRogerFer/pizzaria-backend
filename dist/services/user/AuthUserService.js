@@ -18,14 +18,21 @@ const prisma_1 = __importDefault(require("../../prisma"));
 const bcryptjs_1 = require("bcryptjs");
 // importando a biblioteca para gerar tokens JWT
 const jsonwebtoken_1 = require("jsonwebtoken");
+// importando utilitários de validação
+const validation_1 = require("../../utils/validation");
 // criando a classe
 class AuthUserService {
     execute(_a) {
         return __awaiter(this, arguments, void 0, function* ({ email, password }) {
+            // Validando e sanitizando email
+            const sanitizedEmail = (0, validation_1.validateAndSanitizeEmail)(email);
+            if (!password) {
+                throw new Error("Password is required");
+            }
             // verificando se o email existe
             const user = yield prisma_1.default.user.findFirst({
                 where: {
-                    email: email
+                    email: sanitizedEmail
                 }
             });
             if (!user) {
